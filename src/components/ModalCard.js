@@ -8,7 +8,7 @@ function ModalCard({ show, detailUser, isClosed }) {
     <div className="container__modalCard">
       <Modal show={show}>
         <Modal.Header>
-          <Modal.Title>User details</Modal.Title>
+          <Modal.Title>{detailUser.name} details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Container>

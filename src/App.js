@@ -10,7 +10,6 @@ function App() {
     data: [],
     show: false,
     detailUser: {},
-    windowResize: window.innerWidth,
   });
   const usersList = () => {
     Axios.get("https://jsonplaceholder.typicode.com/users").then((el) => {
@@ -30,12 +29,16 @@ function App() {
         <Button
           className="button__showTable"
           onClick={usersList}
-          variant="primary"
+          variant={state.data.length !== 0 ? 'secondary' : 'primary'}
+          disabled={state.data.length !== 0}
         >
           Show table
         </Button>
       </div>
-      <TableLayout {...state} details={detailUser} />
+      {state.data.length !== 0 ? (
+        <TableLayout {...state} details={detailUser} />
+      ) : null}
+
       <ModalCard {...state} isClosed={modalClose} />
     </div>
   );
