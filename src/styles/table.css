@@ -1,0 +1,51 @@
+Table {
+    width: 98% !important;
+    margin: 0 auto;
+    box-shadow: 0px 4px 20px rgb(80, 80, 80);
+}
+
+Table thead {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+Table tbody tr td {
+    vertical-align: middle;
+}
+
+Table tbody tr td Button {
+    width: 80%;
+}
+
+Table tbody {
+    background-color: #ebe9ef;
+}
+
+@media screen and (max-width: 1050px) {
+    Table {
+        width: 95% !important;
+        margin: 0 auto;
+    }
+
+    Table thead {
+        display: none;
+    }
+
+    Table tr {
+        display: flex;
+        flex-direction: column;
+    }
+
+    Table tbody {
+        border-top: none !important;
+    }
+
+    Table tbody tr th:last-child {
+        display: flex;
+        justify-content: center;
+    }
+
+    Table tbody tr td Button {
+        width: 100%;
+    }
+}

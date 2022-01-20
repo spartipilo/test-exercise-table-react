@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
+import Axios from "axios";
+import ModalCard from "./components/ModalCard";
+import TableLayout from "./components/Table";
+import "./App.css";
 
 function App() {
+  const [state, setState] = useState({
+    data: [],
+    show: false,
+    detailUser: {},
+    windowResize: window.innerWidth,
+  });
+  const usersList = () => {
+    Axios.get("https://jsonplaceholder.typicode.com/users").then((el) => {
+      setState({ ...state, data: el.data });
+    });
+  };
+  const detailUser = (id) => {
+    Axios.get(`https://jsonplaceholder.typicode.com/users/` + id).then((el) => {
+      setState({ ...state, show: true, detailUser: el.data });
+    });
+  };
+  const modalClose = (isClosed) => setState({ ...state, show: isClosed });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div className="button__container">
+        <Button
+          className="button__showTable"
+          onClick={usersList}
+          variant="primary"
         >
-          Learn React
-        </a>
-      </header>
+          Show table
+        </Button>
+      </div>
+      <TableLayout {...state} details={detailUser} />
+      <ModalCard {...state} isClosed={modalClose} />
     </div>
   );
 }
