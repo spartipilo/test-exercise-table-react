@@ -11,16 +11,22 @@ function App() {
     show: false,
     detailUser: {},
   });
+  
+  //RICHIAMO API AL CLICK DEL BUTTON - MOSTRO TABELLA
   const usersList = () => {
     Axios.get("https://jsonplaceholder.typicode.com/users").then((el) => {
       setState({ ...state, data: el.data });
     });
   };
+
+  //RICHIAMO DATI DELLE SINGOLE PERSONE TRAMITE IL TASTO "DETTAGLI"
   const detailUser = (id) => {
     Axios.get(`https://jsonplaceholder.typicode.com/users/` + id).then((el) => {
       setState({ ...state, show: true, detailUser: el.data });
     });
   };
+
+  //SERVE PER AGGIORNARE LO STATO "SHOW" SE FALSE O TRUE SULLA FINESTRA DETTAGLI - SE CHIUSA O MENO
   const modalClose = (isClosed) => setState({ ...state, show: isClosed });
 
   return (
